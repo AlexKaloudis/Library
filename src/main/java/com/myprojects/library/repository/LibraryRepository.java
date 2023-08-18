@@ -1,8 +1,8 @@
-package repository;
+package com.myprojects.library.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import model.Library;
+import com.myprojects.library.model.Library;
 
 public interface LibraryRepository extends MongoRepository<Library, String>{
     
