@@ -1,17 +1,25 @@
 package com.myprojects.library.model;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 
+@Data
+@Document
 public class Book {
     @Id
     private String id;
 
-    @Column(unique = true)
+    @Indexed(unique = true)
     private String title;
 
     private int pages;
+    public Book() {
+    }
     
     public Book(String title, String id, int pages) {
         this.title = title;
