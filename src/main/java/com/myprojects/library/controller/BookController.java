@@ -23,7 +23,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void AddLibrary(@RequestBody Book book) {
-        bookService.addBook(book);
+    public void AddMultipleBooks(@RequestBody List<Book> books) {
+        bookService.addListOfBooks(books);
     }
 }
