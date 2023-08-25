@@ -4,19 +4,24 @@ import javax.persistence.Column;
 
 import org.springframework.data.annotation.Id;
 
-public class User {
+import java.util.List;
+
+public class Member {
     @Id
     private String id;
     private String firstName;
     private String lastName;
+    private List<Book> borrowedBooks;
+
     @Column(unique = true)
     private String email;
 
-    public User(String id, String firstName, String lastName, String email) {
+    public Member(String id, String firstName, String lastName, String email,List<Book> borrowedBooks) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.borrowedBooks = borrowedBooks;
     }
 
     public String getFirstName() {
@@ -42,6 +47,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
+
     
 }

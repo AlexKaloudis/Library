@@ -1,36 +1,30 @@
 package com.myprojects.library.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.annotation.Id;
 
 public class Library {
     @Id
     private String id;
-    private String name;
-    private List<Book> books;
-    public Library(String id, String name, List<Book> books) {
+    private List<MemberBooks> membersBooks;
+
+    public Library(String id, List<MemberBooks> membersBooks) {
         this.id = id;
-        this.name = name;
-        this.books = books;
+        this.membersBooks = membersBooks;
     }
-    public String getId() {
-        return id;
+
+    public void borrowBook(@NotNull Member member, @NotNull Book book){
+
+        MemberBooks memberBooksObj = new MemberBooks(member.getFirstName(), member.getLastName(), book.getTitle(),LocalDate.now().plusDays(30) );
+        if(!membersBooks.contains(memberBooksObj)){
+            membersBooks.add(memberBooksObj);
+        }
+        else{
+            System.out.println("the book is already borrowed by some other member");
+        }
     }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public List<Book> getBooks() {
-        return books;
-    }
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-    
+
 }
