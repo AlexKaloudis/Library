@@ -32,5 +32,10 @@ public class LibraryController {
     public void AddLibrary(@RequestBody Library library) {
         libraryService.addLibrary(library);
     }
+    // @PostMapping
+    // @ResponseStatus(HttpStatus.CREATED)
+    // public void BorrowBook(@RequestBody Library library) {
+    //     libraryService.addLibrary(library);
+    // }
     
 }

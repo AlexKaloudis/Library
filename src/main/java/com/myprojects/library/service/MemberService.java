@@ -1,24 +1,24 @@
 package com.myprojects.library.service;
+import com.myprojects.library.model.Member;
+import com.myprojects.library.repository.MemberRepository;
 
-import com.myprojects.library.model.Book;
-import com.myprojects.library.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MemberService {
-    private BookRepository bookRepository;
+    private MemberRepository memberRepository;
 
-    public MemberService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
-    public void addBook(Book book) {
-        bookRepository.insert(book);
+    public void addMember(Member member) {
+        memberRepository.insert(member);
     }
 
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public List<Member> getAllMembers() {
+        return memberRepository.findAll();
     }
 }
