@@ -26,19 +26,30 @@ public class LibraryService {
     public void addLibrary(Library library) {
         libraryRepository.insert(library);
     }
+    public Library UpdateLibrary(String libraryId) {
+        Library library = libraryRepository.findById(libraryId).orElse(null);
+        return libraryRepository.save(library);
+    }
 
     public Library addMemberToLibrary(String libraryId, String memberId) {
         Library library = libraryRepository.findById(libraryId).orElse(null);
         Member member = memberRepository.findById(memberId).orElse(null);
 
         if (library != null && member != null) {
-            List<String> membersIds = new ArrayList<>();
-            library.setMemberIds(membersIds);
-            library.getMemberIds().add(memberId);
+            List<String> membersIds = library.getMemberIds();
+            membersIds.add(memberId);
             return libraryRepository.save(library);
         }
 
         return null; // Handle error case
+    }
+
+    public Library DeleteLibrary(String libraryId){
+        Library library = libraryRepository.findById(libraryId).orElse(null);
+        if(library != null){
+            libraryRepository.delete(library);
+        }
+        return null;
     }
     
     

@@ -3,15 +3,8 @@ package com.myprojects.library.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.myprojects.library.model.Library;
 import com.myprojects.library.service.LibraryService;
@@ -36,15 +29,20 @@ public class LibraryController {
         libraryService.addLibrary(library);
     }
 
-    @PutMapping
-    public Library addMemberToLibrary(@RequestParam(name = "libraryId") String libraryId,@RequestParam(name = "memberId") String memberId) {
+    @PutMapping("{libraryId}/{memberId}")
+    public Library addMemberToLibrary(@PathVariable(name = "libraryId") String libraryId,@PathVariable(name = "memberId") String memberId) {
         return libraryService.addMemberToLibrary(libraryId, memberId);
     }
+    @PutMapping("{id}")
+    public ResponseEntity<Library> UpdateLibrary(@PathVariable String id, @RequestBody Library library) {
+        libraryService.UpdateLibrary(id);
+        return ResponseEntity.ok(library);
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<Library> DeleteLibrary(@PathVariable String id) {
+        libraryService.DeleteLibrary(id);
+        return ResponseEntity.ok(null);
+    }
 
-    // @PostMapping
-    // @ResponseStatus(HttpStatus.CREATED)
-    // public void BorrowBook(@RequestBody Library library) {
-    //     libraryService.addLibrary(library);
-    // }
     
 }

@@ -3,19 +3,18 @@ package com.myprojects.library.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
-@Data
 @Document
+@Data
 public class Library {
     @Id
     private String id;
     private String name;
     private List<String> memberIds;
-    private List<MemberBooks> membersBooks;
+    private List<String> bookIds;
 
     
     public Library() {
@@ -25,10 +24,11 @@ public class Library {
         this.id = id;
         this.name = name;
     }
-
-    public Library(String id, List<MemberBooks> membersBooks) {
+    public Library(String id, String name,List<String> memberIds,List<String> bookIds) {
         this.id = id;
-        this.membersBooks = membersBooks;
+        this.name = name;
+        this.memberIds = memberIds;
+        this.bookIds = bookIds;
     }
 
     public void setMemberIds(List<String> memberIds) {
@@ -39,15 +39,15 @@ public class Library {
         return memberIds;
     }
 
-    public void borrowBook(@NotNull Member member, @NotNull Book book){
-
-        MemberBooks memberBooksObj = new MemberBooks(member.getFirstName(), member.getLastName(), book.getTitle(),LocalDate.now().plusDays(30) );
-        if(!membersBooks.contains(memberBooksObj)){
-            membersBooks.add(memberBooksObj);
-        }
-        else{
-            System.out.println("the book is already borrowed by some other member");
-        }
-    }
+//    public void borrowBook(@NotNull Member member, @NotNull Book book){
+//
+//        MemberBooks memberBooksObj = new MemberBooks(member.getFirstName(), member.getLastName(), book.getTitle(),LocalDate.now().plusDays(30) );
+//        if(!membersBooks.contains(memberBooksObj)){
+//            membersBooks.add(memberBooksObj);
+//        }
+//        else{
+//            System.out.println("the book is already borrowed by some other member");
+//        }
+//    }
 
 }

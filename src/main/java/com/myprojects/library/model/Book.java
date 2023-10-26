@@ -4,13 +4,17 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Data
+import java.util.Objects;
+
 @Document
+@Data
 public class Book {
     @Id
     private String id;
 
+    @Field("title")
     @Indexed(unique = true)
     private String title;
 
@@ -38,5 +42,25 @@ public class Book {
     public void setPages(int pages) {
         this.pages = pages;
     }
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", pages='" + pages + '\'' +
+                '}';
+    }
 }
