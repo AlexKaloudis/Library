@@ -20,18 +20,22 @@ public class LibraryController {
 
     @GetMapping
     public List<Library> GetLibraries() {
-        return libraryService.getAllLibraries();
+        return libraryService.GetAllLibraries();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void AddLibrary(@RequestBody Library library) {
-        libraryService.addLibrary(library);
+        libraryService.AddLibrary(library);
     }
 
     @PutMapping("{libraryId}/{memberId}")
-    public Library addMemberToLibrary(@PathVariable(name = "libraryId") String libraryId,@PathVariable(name = "memberId") String memberId) {
-        return libraryService.addMemberToLibrary(libraryId, memberId);
+    public Library AddMemberToLibrary(@PathVariable(name = "libraryId") String libraryId,@PathVariable(name = "memberId") String memberId) {
+        return libraryService.AddMemberToLibrary(libraryId, memberId);
+    }
+    @PutMapping
+    public Library AddBooksToLibrary(@RequestBody Library library) {
+        return libraryService.AddBooksToLibrary(library.getId(), library.getBookIds());
     }
     @PutMapping("{id}")
     public ResponseEntity<Library> UpdateLibrary(@PathVariable String id, @RequestBody Library library) {
