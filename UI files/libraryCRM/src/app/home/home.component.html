@@ -1,0 +1,23 @@
+
+
+<h2>My Libraries</h2>
+
+<div>
+  <label for="new-library">Library name: </label>
+  <input id="new-lib" #libraryName />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button type="button" class="add-button" (click)="add(libraryName.value); libraryName.value=''">
+    Add library
+  </button>
+</div>
+
+<ul class="libraries">
+  <li *ngFor="let lib of libraries">
+    <a routerLink="/detail/{{lib.id}}">
+      <span class="badge">{{lib.id}}</span> {{lib.name}}
+    </a>
+    <button type="button" class="delete" title="delete library"
+      (click)="delete(lib)">x</button>
+  </li>
+</ul>
