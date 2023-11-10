@@ -1,7 +1,5 @@
 package com.myprojects.library.service;
 
-import java.util.ArrayList;
-.import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -32,40 +30,39 @@ public class LibraryService {
     public void AddLibrary(Library library) {
         libraryRepository.insert(library);
     }
-    public Library UpdateLibrary(String libraryId) {
-        Library library = libraryRepository.findById(libraryId).orElse(null);
-        return libraryRepository.save(library);
+    public Library UpdateLibrary(Library updatedLibrary) {
+        return libraryRepository.save(updatedLibrary);
     }
 
-    public Library AddMemberToLibrary(String libraryId, String memberId) {
-        Library library = libraryRepository.findById(libraryId).orElse(null);
-        Member member = memberRepository.findById(memberId).orElse(null);
-        HashSet<String> membersIds = new HashSet<String>();
-        if (library != null && member != null) {
-            membersIds.add(memberId);
-            if(library.getMemberIds()!= null){
-                membersIds.addAll(library.getMemberIds());
-            }
-            library.setMemberIds(List.copyOf(membersIds));
-            return libraryRepository.save(library);
-        }
+//    public Library AddMemberToLibrary(String libraryId, String memberId) {
+//        Library library = libraryRepository.findById(libraryId).orElse(null);
+//        Member member = memberRepository.findById(memberId).orElse(null);
+//        HashSet<String> membersIds = new HashSet<String>();
+//        if (library != null && member != null) {
+//            membersIds.add(memberId);
+//            if(library.getMemberIds()!= null){
+//                membersIds.addAll(library.getMemberIds());
+//            }
+//            library.setMemberIds(List.copyOf(membersIds));
+//            return libraryRepository.save(library);
+//        }
+//
+//        return null; // Handle error case
+//    }
 
-        return null; // Handle error case
-    }
-
-    public Library AddBooksToLibrary(String libraryId,List<String> bookIds) {
-        Library library = libraryRepository.findById(libraryId).orElse(null);
-        HashSet<String> bookIdsFromDb = new HashSet<String>();
-        if(library.getBookIds() != null){
-            bookIdsFromDb.addAll(library.getBookIds());
-        }
-        if (bookIds.size()>0) {
-            bookIdsFromDb.addAll(bookIds);
-            library.setBookIds(List.copyOf(bookIdsFromDb));
-            return libraryRepository.save(library);
-        }
-        return null; // Handle error case
-    }
+//    public Library AddBooksToLibrary(String libraryId,List<String> bookIds) {
+//        Library library = libraryRepository.findById(libraryId).orElse(null);
+//        HashSet<String> bookIdsFromDb = new HashSet<String>();
+//        if(library.getBookIds() != null){
+//            bookIdsFromDb.addAll(library.getBookIds());
+//        }
+//        if (bookIds.size()>0) {
+//            bookIdsFromDb.addAll(bookIds);
+//            library.setBookIds(List.copyOf(bookIdsFromDb));
+//            return libraryRepository.save(library);
+//        }
+//        return null; // Handle error case
+//    }
 
     public Library DeleteLibrary(String libraryId){
         Library library = libraryRepository.findById(libraryId).orElse(null);
@@ -74,6 +71,10 @@ public class LibraryService {
         }
         return null;
     }
-    
-    
+
+
+    public Library GetLibrary(String id) {
+        Library lib = libraryRepository.findById(id).orElse(null);
+        return lib;
+    }
 }

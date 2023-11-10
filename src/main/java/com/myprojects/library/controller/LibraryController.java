@@ -22,6 +22,10 @@ public class LibraryController {
     public List<Library> GetLibraries() {
         return libraryService.GetAllLibraries();
     }
+    @GetMapping("{id}")
+    public Library GetLibrary(@PathVariable String id) {
+        return libraryService.GetLibrary(id);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -29,18 +33,18 @@ public class LibraryController {
         libraryService.AddLibrary(library);
     }
 
-    @PutMapping("{libraryId}/{memberId}")
-    public Library AddMemberToLibrary(@PathVariable(name = "libraryId") String libraryId,@PathVariable(name = "memberId") String memberId) {
-        return libraryService.AddMemberToLibrary(libraryId, memberId);
-    }
+//    @PutMapping("{libraryId}/{memberId}")
+//    public Library AddMemberToLibrary(@PathVariable(name = "libraryId") String libraryId,@PathVariable(name = "memberId") String memberId) {
+//        return libraryService.AddMemberToLibrary(libraryId, memberId);
+//    }
+//    @PutMapping
+//    public Library AddBooksToLibrary(@RequestBody Library library) {
+//        return libraryService.AddBooksToLibrary(library.getId(), library.getBookIds());
+//    }
     @PutMapping
-    public Library AddBooksToLibrary(@RequestBody Library library) {
-        return libraryService.AddBooksToLibrary(library.getId(), library.getBookIds());
-    }
-    @PutMapping("{id}")
-    public ResponseEntity<Library> UpdateLibrary(@PathVariable String id, @RequestBody Library library) {
-        libraryService.UpdateLibrary(id);
-        return ResponseEntity.ok(library);
+    public ResponseEntity<Library> UpdateLibrary(@RequestBody Library updatedLibrary) {
+        libraryService.UpdateLibrary(updatedLibrary);
+        return ResponseEntity.ok(updatedLibrary);
     }
     @DeleteMapping("{id}")
     public ResponseEntity<Library> DeleteLibrary(@PathVariable String id) {
