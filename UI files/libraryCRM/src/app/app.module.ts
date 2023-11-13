@@ -4,21 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AddLibraryComponent } from './add-library/add-library.component';
-import { LibraryDashboardComponent } from './library-dashboard/library-dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { LibraryDetailComponent } from './library-detail/library-detail.component';
+import { BookDetailComponent } from './book-detail/book-detail.component';
+import { BookDashboardComponent } from './book-dashboard/book-dashboard.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AddLibraryComponent,
     LibraryDetailComponent,
-    LibraryDashboardComponent
+    BookDetailComponent,
+    BookDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +27,7 @@ import { LibraryDetailComponent } from './library-detail/library-detail.componen
     ToastrModule.forRoot(),
     HttpClientModule,
     MatIconModule,
+    MatListModule,
     FormsModule
   ],
   providers: [],

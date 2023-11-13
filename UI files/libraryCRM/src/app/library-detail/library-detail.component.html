@@ -1,10 +1,22 @@
 <div *ngIf="library">
   <h2>{{library.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{library.id}}</div>
+  <div [hidden]="true"><span>id: </span>{{library.id}}</div>
   <div>
-    <label for="library-name">library name: </label>
-    <input id="library-name" [(ngModel)]="library.name" placeholder="library name"/>
+    <label for="library-name">Library name: </label>
+    <input id="library-name" [(ngModel)]="library.name" placeholder="Library name"/>
+
+    <!-- Assuming typesOfShoes is an array in your component -->
+    <mat-selection-list #booksList>
+      <mat-list-option *ngFor="let book of library.books" [value]="book">
+        <mat-icon matListIcon>book</mat-icon>
+        {{book.title+", "+book.pages}}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <p>
+      Options selected: {{booksList.selectedOptions.selected.length}}
+    </p>
   </div>
-  <button type="button" (click)="goBack()">go back</button>
-  <button type="button" (click)="save()">save</button>
+  <button type="button" (click)="goBack()">Go back</button>
+  <button type="button" (click)="save()">Save</button>
 </div>

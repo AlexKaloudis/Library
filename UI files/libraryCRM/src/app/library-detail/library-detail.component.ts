@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Library } from '../Models/library';
-import { LibraryService } from '../Service/library.service';
+import { LibraryService } from '../Service/Library/library.service';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
+import { Book } from '../Models/book';
 
 @Component({
   selector: 'app-library-detail',
@@ -10,7 +11,27 @@ import {Location} from '@angular/common';
   styleUrls: ['./library-detail.component.scss']
 })
 export class LibraryDetailComponent implements OnInit {
-  library : Library | undefined;
+  library: Library = {
+    id: '',
+    name: '',
+    books: [],
+    members: []
+  };
+  // books : Book[] = [{
+  //   id: '653f56044b98ec60a625558a',
+  //   title: 'Politeia',
+  //   pages: 245
+  // },
+  // {
+  //   id: '653f5b374b98ec60a625558e',
+  //   title: '15 rules for life',
+  //   pages: 245
+  // },
+  // {
+  //   id: '653f5b5c4b98ec60a625558f',
+  //   title: 'Fahrenheit 165',
+  //   pages: 245
+  // }];
 
   constructor(
     private libraryService: LibraryService,
@@ -25,8 +46,11 @@ export class LibraryDetailComponent implements OnInit {
   getLibrary():void{
     const id = this.route.snapshot.paramMap.get('libraryId')!;
     this.libraryService.getLibrary(id)
-    .subscribe(lib => this.library = lib);
-    // console.log(id);
+    .subscribe(lib => {
+      this.library = lib;
+      lib.books = this.library.books;
+      console.log('Library Data:', this.library.books);
+    });
   }
 
   save(): void {

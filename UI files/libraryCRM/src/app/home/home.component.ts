@@ -2,8 +2,7 @@ import { Component, Input, OnInit, Type } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { LibraryService } from '../Service/library.service';
-// import { HttpProviderService } from '../Service/http-provider.service';
+import { LibraryService } from '../Service/Library/library.service';
 import { MatIcon } from '@angular/material/icon';
 import { Library } from '../Models/library';
 
@@ -31,8 +30,8 @@ export class HomeComponent implements OnInit {
     name = name.trim();
     if (!name) { return; }
     this.libraryService.addLibrary({ name } as Library)
-      .subscribe(hero => {
-        this.libraries.push(hero);
+      .subscribe(lib => {
+        this.libraries.push(lib);
       });
   }
 
