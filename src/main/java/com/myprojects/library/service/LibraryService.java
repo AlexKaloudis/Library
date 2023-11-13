@@ -3,19 +3,27 @@ package com.myprojects.library.service;
 import java.util.HashSet;
 import java.util.List;
 
+import com.myprojects.library.MongoConfig;
 import com.myprojects.library.model.Book;
 import com.myprojects.library.repository.BookRepository;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.myprojects.library.model.Library;
 import com.myprojects.library.model.Member;
 import com.myprojects.library.repository.LibraryRepository;
 import com.myprojects.library.repository.MemberRepository;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+
 @Service
 public class LibraryService {
     private LibraryRepository libraryRepository;
     private MemberRepository memberRepository;
     private BookRepository bookRepository;
+    private MongoTemplate mt;
+
 
     public LibraryService(LibraryRepository libraryRepository,MemberRepository memberRepository,BookRepository bookRepository) {
         this.libraryRepository = libraryRepository;
@@ -31,6 +39,28 @@ public class LibraryService {
         libraryRepository.insert(library);
     }
     public Library UpdateLibrary(Library updatedLibrary) {
+        MongoConfig mongoConfig = new MongoConfig();
+        if(updatedLibrary.getBooks() != null){
+            for (Book book : updatedLibrary.getBooks()) {
+                try {
+                    mongoConfig.mongoTemplate().update(Library.class)
+                            .matching(where("id").is(updatedLibrary.getId()))
+                            .apply(new Update().push("books", book))
+                            .first();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        if(updatedLibrary.getMembers() != null){
+            for (Member member : updatedLibrary.getMembers()) {
+                mt.update(Library.class)
+                        .matching(where("id").is(updatedLibrary.getId()))
+                        .apply(new Update().push("members", member))
+                        .first();
+            }
+        }
+
         return libraryRepository.save(updatedLibrary);
     }
 

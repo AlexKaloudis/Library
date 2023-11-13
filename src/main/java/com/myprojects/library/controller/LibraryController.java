@@ -42,7 +42,7 @@ public class LibraryController {
 //        return libraryService.AddBooksToLibrary(library.getId(), library.getBookIds());
 //    }
     @PutMapping
-    public ResponseEntity<Library> UpdateLibrary(@RequestBody Library updatedLibrary) {
+    public ResponseEntity<Library> UpdateLibrary(@RequestBody Library updatedLibrary) throws Exception {
         libraryService.UpdateLibrary(updatedLibrary);
         return ResponseEntity.ok(updatedLibrary);
     }

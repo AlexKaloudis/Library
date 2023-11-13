@@ -1,20 +1,22 @@
 package com.myprojects.library.model;
 
-import java.time.LocalDate;
 import java.util.List;
-
+import com.mongodb.lang.Nullable;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-@Document
+@Document("libraries")
 @Data
 public class Library {
     @Id
     private String id;
     private String name;
-    private List<String> memberIds;
-    private List<String> bookIds;
+    @DocumentReference(lazy=true)
+    private List<Member> members;
+    @DocumentReference(lazy=true)
+    private List<Book> books;
 
     
     public Library() {
@@ -24,19 +26,11 @@ public class Library {
         this.id = id;
         this.name = name;
     }
-    public Library(String id, String name,List<String> memberIds,List<String> bookIds) {
+    public Library(String id, String name,List<Member> members,List<Book> books) {
         this.id = id;
         this.name = name;
-        this.memberIds = memberIds;
-        this.bookIds = bookIds;
-    }
-
-    public void setMemberIds(List<String> memberIds) {
-        this.memberIds = memberIds;
-    }
-
-    public List<String> getMemberIds() {
-        return memberIds;
+        this.members = members;
+        this.books = books;
     }
 
 //    public void borrowBook(@NotNull Member member, @NotNull Book book){

@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Objects;
 
-@Document
+@Document("books")
 @Data
 public class Book {
     @Id
@@ -17,15 +17,17 @@ public class Book {
     @Field("title")
     @Indexed(unique = true)
     private String title;
+    private String author;
 
     private int pages;
     public Book() {
     }
     
-    public Book(String title, String id, int pages) {
+    public Book(String title, String id, int pages,String author) {
         this.title = title;
         this.id = id;
         this.pages = pages;
+        this.author = author;
     }
     public String getTitle() {
         return title;
@@ -42,6 +44,15 @@ public class Book {
     public void setPages(int pages) {
         this.pages = pages;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

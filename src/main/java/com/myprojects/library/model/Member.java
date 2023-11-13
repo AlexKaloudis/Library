@@ -8,14 +8,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 import java.util.Objects;
 
-@Document
+@Document("members")
 @Data
 public class Member {
     @Id
     private String id;
     private String firstName;
     private String lastName;
-    private List<String> borrowedBookIds;
+    private List<String> borrowedBooks;
 
     @Indexed(unique = true)
     private String email;
@@ -23,12 +23,12 @@ public class Member {
     public  Member(){
 
     }
-    public Member(String id, String firstName, String lastName,String email, List<String> borrowedBookIds) {
+    public Member(String id, String firstName, String lastName,String email, List<String> borrowedBooks) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.borrowedBookIds = borrowedBookIds;
+        this.borrowedBooks = borrowedBooks;
     }
     public String getId(){return id;}
 
