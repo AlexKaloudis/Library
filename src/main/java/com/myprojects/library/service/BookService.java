@@ -1,6 +1,7 @@
 package com.myprojects.library.service;
 
 import com.myprojects.library.model.Book;
+import com.myprojects.library.model.Library;
 import com.myprojects.library.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,17 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+
+    public Book GetBook(String id) {
+        return bookRepository.findById(id).orElse(null);
+    }
+
+    public Book UpdateBook(Book book) {
+        return bookRepository.save(book);
+    }
+
+    public void deleteBook(String bookId) {
+       bookRepository.deleteById(bookId);
     }
 }
