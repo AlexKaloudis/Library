@@ -1,1 +1,15 @@
-<p>book-dashboard works!</p>
+<ul class="books">
+  <li *ngFor="let book of books">
+    <a routerLink="/BookDetail/{{book.id}}">
+      <span class="badge">{{book.title}}</span>
+    </a>
+
+
+    <!-- <button type="button" class="delete" title="delete library"
+      (click)="delete(book)">x</button> -->
+  </li>
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              aria-label="Select page">
+  </mat-paginator>
+</ul>

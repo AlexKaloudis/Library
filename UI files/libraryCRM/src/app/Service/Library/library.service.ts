@@ -22,7 +22,7 @@ export class LibraryService {
   getLibraries(): Observable<Library[]> {
     return this.http.get<Library[]>(this.librariesUrl)
     .pipe(
-      tap(_ => this.log('fetched libraries')),
+        tap(_ => this.log('fetched libraries')),
         catchError(this.handleError<Library[]>('getLibraries', []))
       );
   }
@@ -30,8 +30,8 @@ export class LibraryService {
   getLibrary(id: string): Observable<Library> {
     return this.http.get<Library>(this.librariesUrl +'/' +id)
     .pipe(
-      tap(_ => this.log(`fetched library id=${id}`)),
-    catchError(this.handleError<Library>(`getLibrary id=${id}`))
+      tap(_ => this.log(`fetched library id = ${id}`)),
+      catchError(this.handleError<Library>(`getLibrary id = ${id}`))
     );
   }
 

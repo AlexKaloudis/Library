@@ -1,1 +1,12 @@
-<p>book-detail works!</p>
+<div *ngIf="book">
+  <h2>{{book.title}} Details</h2>
+  <h2> Author: {{book.author}}</h2>
+  <div [hidden]="true"><span>id: </span>{{book.id}}</div>
+  <div>
+    <label for="book-title">book title: </label>
+    <input id="book-title" [(ngModel)]="book.title" placeholder="Book title"/>
+    <img  [src]="'assets/images/' + book.image" >
+  <button type="button" (click)="goBack()">Go back</button>
+  <button type="button" (click)="save()">Save</button>
+</div>
+

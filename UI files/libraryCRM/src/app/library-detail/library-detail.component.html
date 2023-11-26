@@ -1,11 +1,10 @@
 <div *ngIf="library">
-  <h2>{{library.name | uppercase}} Details</h2>
+  <h2>{{library.name}} Details</h2>
   <div [hidden]="true"><span>id: </span>{{library.id}}</div>
   <div>
     <label for="library-name">Library name: </label>
     <input id="library-name" [(ngModel)]="library.name" placeholder="Library name"/>
 
-    <!-- Assuming typesOfShoes is an array in your component -->
     <mat-selection-list #booksList>
       <mat-list-option *ngFor="let book of library.books" [value]="book">
         <mat-icon matListIcon>book</mat-icon>

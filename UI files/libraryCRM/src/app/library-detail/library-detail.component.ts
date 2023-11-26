@@ -49,7 +49,7 @@ export class LibraryDetailComponent implements OnInit {
     .subscribe(lib => {
       this.library = lib;
       lib.books = this.library.books;
-      console.log('Library Data:', this.library.books);
+      console.log('Library contains these books:', this.library.books);
     });
   }
 

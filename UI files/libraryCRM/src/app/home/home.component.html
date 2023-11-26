@@ -14,7 +14,7 @@
 
 <ul class="libraries">
   <li *ngFor="let lib of libraries">
-    <a routerLink="/detail/{{lib.id}}">
+    <a routerLink="/LibraryDetail/{{lib.id}}">
       <span class="badge">{{lib.id}}</span> {{lib.name}}
     </a>
     <button type="button" class="delete" title="delete library"

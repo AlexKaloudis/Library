@@ -12,6 +12,7 @@ import { LibraryDetailComponent } from './library-detail/library-detail.componen
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookDashboardComponent } from './book-dashboard/book-dashboard.component';
 import {MatListModule} from '@angular/material/list';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatListModule} from '@angular/material/list';
     HttpClientModule,
     MatIconModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
