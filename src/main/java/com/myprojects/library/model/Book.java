@@ -18,16 +18,21 @@ public class Book {
     @Indexed(unique = true)
     private String title;
     private String author;
+    private String image;
+    private String summary;
 
     private int pages;
     public Book() {
     }
     
-    public Book(String title, String id, int pages,String author) {
+    public Book(String title, String id, int pages,String author,String image, String summary) {
         this.title = title;
         this.id = id;
         this.pages = pages;
         this.author = author;
+        this.image = image;
+        this.summary = summary;
+
     }
     public String getTitle() {
         return title;
@@ -51,6 +56,22 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     @Override
